@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Cannonball
+  - ScoreManagerTag
   layers:
   - Default
   - TransparentFX

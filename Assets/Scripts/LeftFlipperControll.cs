@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class LeftFlipperControll : MonoBehaviour
 {
+    //The script of this flipper is identical to right flipper, except instead of the D key, it uses the A key
+    
+    
     public float restPosition = 0f;
     public float pressedPosition = 45f;
     public float hitStrength = 10000f;
