@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEditor;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,16 +12,10 @@ public class ScoreManager : MonoBehaviour
     //To convert the highscore text to shown on screen
     [SerializeField] private TMP_Text highScoreText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    // Method to update the highscore 
     void Update()
     {
-
+        HighScoreUpdate();
     }
 
     //Method to add points to the score
@@ -47,6 +40,7 @@ public class ScoreManager : MonoBehaviour
             {
                 //Save a new high score equal to the current score
                 PlayerPrefs.SetInt("SavedHighScore", currentTotalScore);
+                PlayerPrefs.Save();
             }
         }
 
@@ -54,9 +48,17 @@ public class ScoreManager : MonoBehaviour
         {
             //If there aren't any saved high scores, save a new highscore equal to the current score
             PlayerPrefs.SetInt("SavedHighScore", currentTotalScore);
+            PlayerPrefs.Save();
         }
 
         //Convert the saved highscore to text shown on screen 
         highScoreText.text = PlayerPrefs.GetInt("SavedHighScore").ToString();
+    }
+
+    //A method so I can reset the highscore with a button
+    public void ResetHighScore()
+    {
+        PlayerPrefs.DeleteKey("SavedHighScore");
+        Debug.Log("Highscore reset");
     }
 }

@@ -8,10 +8,13 @@ public class PlungerController : MonoBehaviour {
     [SerializeField] private float muzzleVelocity;
 
     //Which ball 
-    [SerializeField] private GameObject BallPrefab;    
+    [SerializeField] private GameObject BallPrefab;
+
+    // variable to count how many balls the player has
+    public int ballsLeft = 3;
 	
 	
-	// Update is called once per frame
+	
 	void Update () 
 	{
         //Make a new method called cannon inputs to run        
@@ -26,17 +29,28 @@ public class PlungerController : MonoBehaviour {
             FirePlunger();
         }
     }
-	
-    //Run the method fire plunger
-	void FirePlunger() 
-    {		
-		//Find the game object called Muzzle
-        GameObject muzzle = GameObject.Find("Muzzle");
 
-        //Shoot an object called cannonBall, which is the ballPrefab, from the position and rotation of the muzzle game object
-		GameObject cannonBall = (GameObject)Instantiate(BallPrefab, muzzle.transform.position, muzzle.transform.rotation);
-		
-        //Shoot the cannonball (ball) rigidbody with the linear velocity (speed) of the muzzle velocity value in the forward direction 
-        cannonBall.transform.GetComponent<Rigidbody>().linearVelocity = muzzle.transform.forward*muzzleVelocity;
-	}
+    //Run the method fire plunger
+    void FirePlunger()
+    {
+        // If the player has more than 0 balls left, they can fire the plunger
+        if (ballsLeft > 0)
+
+        {
+            //Subtract one ball from the count 
+            ballsLeft--;
+            
+            //Find the game object called Muzzle
+            GameObject muzzle = GameObject.Find("Muzzle");
+
+            //Shoot an object called cannonBall, which is the ballPrefab, from the position and rotation of the muzzle game object
+            GameObject cannonBall = (GameObject)Instantiate(BallPrefab, muzzle.transform.position, muzzle.transform.rotation);
+
+            //Shoot the cannonball (ball) rigidbody with the linear velocity (speed) of the muzzle velocity value in the forward direction 
+            cannonBall.transform.GetComponent<Rigidbody>().linearVelocity = muzzle.transform.forward * muzzleVelocity;
+
+
+        }
+
+    }
 }

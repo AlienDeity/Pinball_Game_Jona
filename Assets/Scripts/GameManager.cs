@@ -34,20 +34,20 @@ public class GameManager : MonoBehaviour
         ballCount_Txt.text = ballsLeft.ToString();
 
 
-        if (ballsLeft > 0)
+        if (ballsLeft <= 0)
         {
-
-        }
-        else
-        {
-            //If the amount of balls left not bigger than zero, make everything stop, and show the game over screen
+            //If the amount of balls left is smaller than or equal to zero, make everything stop, and show the game over screen
             Time.timeScale = 0;
             gameOverScreen.SetActive(true);
         }
+      
     }
     public void RestartGame()
     {
         //When the player restarts the game, use the scene manager to reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        //Start time again
+        Time.timeScale = 1;
     }
 }
